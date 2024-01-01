@@ -33,12 +33,14 @@ class CountryFlag extends StatelessWidget {
     double? height,
     double? width,
     double? borderRadius,
+    BoxFit? boxFit,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
           height: height,
           width: width,
           borderRadius: borderRadius,
+          boxFit: boxFit,
         );
 
   /// {@macro country_flags}
@@ -48,6 +50,7 @@ class CountryFlag extends StatelessWidget {
     this.height,
     this.width,
     this.borderRadius,
+    this.boxFit,
   });
 
   /// The country ISO code of the flag to display.
@@ -64,6 +67,8 @@ class CountryFlag extends StatelessWidget {
   /// The border radius of the corners of the flag.
   final double? borderRadius;
 
+  final BoxFit? boxFit;
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -75,6 +80,7 @@ class CountryFlag extends StatelessWidget {
           String() => Semantics(
               label: flagCode,
               child: ScalableImageWidget.fromSISource(
+                fit: boxFit ?? BoxFit.contain,
                 key: const Key('svgFlag'),
                 si: ScalableImageSource.fromSI(
                   rootBundle,
